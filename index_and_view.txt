@@ -1,0 +1,37 @@
+
+--------------------INDEX--------------------
+
+CREATE INDEX name_index ON employee (lname);
+
+SELECT lname FROM employee WHERE SSN > 6000000;
+
+0.0002 sec
+
+
+
+DROP INDEX name_index ON employee;
+
+SELECT lname FROM employee WHERE SSN > 6000000;
+
+0.0009 sec
+
+
+The first query was quicker and more efficient because it was using the index.
+The index allows the database to find any record of "lname" without having to read all the tuples
+in the "employee" relation.
+
+
+--------------------VIEW--------------------
+
+CREATE VIEW faculty AS
+SELECT SSN, fname, lname
+FROM employee;
+
+When you try to insert a new value into the "faculty" view, mySQL shows success, however nothing is added. This is because
+"faculty" is a view from the relation "employee" and this relation needs more than just SSN, fname, and lname for a tuple 
+to be added. The view should update if you instert into the "employee" relation.
+
+
+
+
+
